@@ -47,6 +47,12 @@ public class SceneLoader : MonoBehaviour
 
     }
 
+    public void loadFirstLevel() {
+
+        SceneManager.LoadScene("Level 1");
+
+    }
+
 
 
 
@@ -64,7 +70,7 @@ public class SceneLoader : MonoBehaviour
 
     }
 
-    //(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level 5")) &&
+    
 
 
 

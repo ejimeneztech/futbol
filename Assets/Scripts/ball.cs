@@ -16,6 +16,9 @@ public class ball : MonoBehaviour
     Vector2 playerToBallVector;
     bool hasStarted = false;
 
+    //cached componenet ref
+    AudioSource myAudioSource;
+
   
 
     // Use this for initialization)
@@ -23,6 +26,9 @@ public class ball : MonoBehaviour
     {
         //calculate diff/distance in vectors
         playerToBallVector = transform.position -player.transform.position;
+        myAudioSource = GetComponent<AudioSource>();
+        myAudioSource.volume = 0;
+
         
     }
 
@@ -33,8 +39,11 @@ public class ball : MonoBehaviour
         {
             LockBallToPaddle();
             KickOnMouseClick();
-            
-           
+          
+
+
+
+
         }
         
     }
@@ -59,6 +68,16 @@ public class ball : MonoBehaviour
     }
 
 
+    //play sound when ball collides with other assets
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (hasStarted)
+        {
+            myAudioSource.volume = 1;
+            myAudioSource.Play();
+            
+        }
+    }
 
-  
+
 }
