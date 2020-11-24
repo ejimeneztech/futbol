@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameScore : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class GameScore : MonoBehaviour
     [SerializeField] public int currentScore = 0;
     [SerializeField] public int goalieCurrentScore = 0;
 
+    
+
     //singleton pattern 
     private void Awake()
     {
+        
         int gameScoreCount = FindObjectsOfType<GameScore>().Length;
         if (gameScoreCount > 1)
         {
@@ -29,6 +33,17 @@ public class GameScore : MonoBehaviour
         }
 
     }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
 
     void Start()
     {
@@ -66,7 +81,19 @@ public class GameScore : MonoBehaviour
 
 
 
-   
+
+    //destroy the score object when the win or lose scenes load (look into onEnable functions)
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // here you can use scene.buildIndex or scene.name to check which scene was loaded
+        if (scene.name == "You Win" || scene.name == "You Lose")
+        {
+            // Destroy the gameobject this script is attached to
+            Destroy(gameObject);
+        }
+    }
+    
 
 
 }
