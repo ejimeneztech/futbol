@@ -62,10 +62,12 @@ public class SceneLoader : MonoBehaviour
         if  (FindObjectOfType<GameScore>().currentScore > FindObjectOfType<GameScore>().goalieCurrentScore)
         {
             SceneManager.LoadScene("You Win");
+         
         }
-    
+
         else {
             SceneManager.LoadScene("You Lose");
+          
         }
 
     }
